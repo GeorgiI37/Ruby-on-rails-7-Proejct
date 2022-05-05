@@ -1,0 +1,22 @@
+default: &default
+  adapter: "postgresql"
+  encoding: "unicode"
+  database: <%= ENV.fetch("POSTGRES_DB") { "baseapp" } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "ylmfghost" } %>
+  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
+  port: <%= ENV.fetch("POSTGRES_PORT") { 5432 } %>
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRES_DB") { "baseapp_development" } %>
+
+test:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRES_DB") { "baseapp_test" } %>
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRES_DB") { "baseapp_production" } %>
